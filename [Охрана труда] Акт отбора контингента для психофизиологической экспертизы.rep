@@ -1,0 +1,216 @@
+PL/SQL Developer Report
+
+[SQL]
+select p.name_u      "Цех",
+       s.name_kat    "Категория",
+       m.full_name_u "Должность",
+       rbf.fam_u||' '||rbf.f_name_u||' '||rbf.s_name_u "Ф.И.О.",
+       id_wt1        "1",
+       id_wt2        "2",
+       id_wt3        "3"
+  from qwerty.sp_pfe_link pl,
+       qwerty.sp_mest m,
+       qwerty.sp_podr p,
+       (select distinct k.id_kat, k.name_u name_kat, s.id_cex, s.id_mest, s.id_stat
+          from qwerty.sp_stat s, qwerty.sp_kat k
+         where s.id_kat = k.id_kat) s,
+       qwerty.sp_rb_key rbk,
+       qwerty.sp_rb_fio rbf
+ where pl.id_cex = p.id_cex
+   and pl.id_mest = m.id_mest
+   and pl.id_cex = s.id_cex
+   and pl.id_mest = s.id_mest
+   and s.id_stat = rbk.id_stat
+   and rbk.id_tab = rbf.id_tab
+ order by pl.id_cex, s.id_kat, m.full_name_u, "Ф.И.О."
+
+[Options]
+Connect=False
+Username=
+Password=2031
+Database=
+ConnectAs=
+LockMode=0
+LockedPassword=2380
+BkgColor=-16777211
+BkgImage=
+FormLayout=False
+OnlyNBSP=False
+LeftMargin=0
+TopMargin=0
+PageBreak=0
+AddSQL=False
+HandleTags=True
+
+[Styles]
+
+{Title}
+Enabled=True
+Name=Report Title
+Description=Акт отбора контингента для психофизиологической экспертизы
+Style=Default Report title
+HeaderStyle=
+Align=3
+Break=0
+Function=0
+Format=
+
+{Param}
+Enabled=True
+Name=Variables
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Table}
+Enabled=False
+Name=Tabular Tables
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Form}
+Enabled=False
+Name=Form Tables
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Field}
+Enabled=False
+Name=Default Field
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=Цех
+Description=
+Style=Blue Header
+HeaderStyle=
+Align=0
+Break=1
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=Категория
+Description=
+Style=Blue Field
+HeaderStyle=
+Align=0
+Break=1
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=Должность
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=3
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=Ф.И.О.
+Description=Фамилия Имя Отчество
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=1
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=2
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=3
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+
+
+[CSS]
+Default Report title
+{
+  Background: #F0F0F0;
+  Color: #000000;
+  Border-style: Solid;
+  Border-width: 1px;
+  Border-Color: #C0C0C0;
+  Padding: 1px;
+  Font-size: 12pt;
+  Font-weight: Bold;
+  Font-style: Italic;
+  Text-align: Center;
+  Width: 100%;
+}
+
+Blue Header
+{
+  Background: #400080;
+  Color: #FFE0E0;
+  Border-style: None;
+  Font-family: Arial;
+  Font-size: 9pt;
+  Font-weight: Bold;
+}
+
+Blue Field
+{
+  Background: #004080;
+  Color: #E0FFE0;
+  Border-style: None;
+  Font-family: Arial;
+  Font-size: 9pt;
+}
+
+

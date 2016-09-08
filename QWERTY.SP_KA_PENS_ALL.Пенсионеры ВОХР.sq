@@ -1,0 +1,7 @@
+SQL=select * from qwerty.sp_ka_pens_all
+=where kto = 7
+Width=1676
+Height=1073
+Splitter=882
+Maximized=True
+SingleRecord=False

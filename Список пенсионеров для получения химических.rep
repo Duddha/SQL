@@ -1,0 +1,153 @@
+PL/SQL Developer Report
+
+[SQL]
+select pa.id_tab "Таб. №",
+       rbf.fam_u || ' ' || rbf.f_name_u || ' ' || rbf.s_name_u "Ф.И.О.",
+       case
+         when mod(trunc((nvl(pa.stag, 0) + nvl(pa.stag_d, 0)) / 12), 10) between 1 and 4 then
+          trunc((nvl(pa.stag, 0) + nvl(pa.stag_d, 0)) / 12) || 'г. '
+         else
+          trunc((nvl(pa.stag, 0) + nvl(pa.stag_d, 0)) / 12) || 'л. '
+       end || mod((nvl(pa.stag, 0) + nvl(pa.stag_d, 0)), 12) || 'м.' "Стаж",
+       pa.dat_uvol "Дата выхода на пенсию"
+  from qwerty.sp_ka_pens_all pa, qwerty.sp_rb_fio rbf
+ where pa.id_tab not in
+       (select id_tab from qwerty.sp_ka_lost where lost_type = 1)
+   and pa.kto <> 7
+
+   and (nvl(pa.stag, 0) + nvl(pa.stag_d, 0) >=
+       (&< name = "Стаж от, лет" > * 12) and
+       nvl(pa.stag, 0) + nvl(pa.stag_d, 0) <
+       (&< name = "Стаж до, лет" ifempty = 10000 > * 12))
+      
+   and nvl(pa.dat_uvol,
+           to_date('&<name="Не учитывать уволенных с" hint="ДД.ММ.ГГГГ">',
+                   'dd.mm.yyyy') - 1) <
+       to_date('&<name="Не учитывать уволенных с">',
+               'dd.mm.yyyy')
+   and rbf.id_tab = pa.id_tab
+ order by 2, 4
+
+[Options]
+Connect=False
+Username=
+Password=2407
+Database=
+ConnectAs=
+LockMode=0
+LockedPassword=2029
+BkgColor=-16777211
+BkgImage=
+FormLayout=False
+OnlyNBSP=False
+LeftMargin=0
+TopMargin=0
+PageBreak=0
+AddSQL=False
+HandleTags=True
+
+[Styles]
+
+{Title}
+Enabled=True
+Name=Report Title
+Description=Список пенсионеров для получения химических
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Param}
+Enabled=True
+Name=Variables
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Table}
+Enabled=False
+Name=Tabular Tables
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Form}
+Enabled=False
+Name=Form Tables
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Field}
+Enabled=False
+Name=Default Field
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=Таб. №
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=Ф.И.О.
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=Стаж
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=Дата выхода на пенсию
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+
+
+[CSS]
+

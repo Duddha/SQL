@@ -1,0 +1,7 @@
+SQL=select * from qwerty.sp_sempol
+=order by id
+Width=1676
+Height=1073
+Splitter=899
+Maximized=True
+SingleRecord=False

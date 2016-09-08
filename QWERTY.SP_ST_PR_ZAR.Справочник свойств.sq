@@ -1,0 +1,7 @@
+SQL=select * from QWERTY.SP_ST_PR_ZAR t
+=select * from QWERTY.SP_PROP_ST_ZAR t order by parent_id, id
+Width=1248
+Height=891
+Splitter=722
+Maximized=True
+SingleRecord=False

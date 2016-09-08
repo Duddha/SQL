@@ -1,0 +1,8 @@
+SQL=select *
+=  from qwerty.SP_PODR t
+= where nvl(substr(TYPE_MASK, 5, 1), ' ') <> ' ' /*1 - нужен без подчиненных, 2 - нужен с подчиненными*/
+Width=999
+Height=673
+Splitter=504
+Maximized=False
+SingleRecord=False

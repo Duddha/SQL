@@ -1,0 +1,6 @@
+SQL=select * from qwerty.SP_PODR t where substr(TYPE_MASK, 3, 1) <> '0'
+Width=999
+Height=673
+Splitter=504
+Maximized=False
+SingleRecord=False

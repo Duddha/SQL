@@ -1,0 +1,3 @@
+-- TAB = EBI: отказы
+
+SELECT * FROM SP_ZK_TAB_IO5_OTKAZ t ORDER BY dat_ev DESC

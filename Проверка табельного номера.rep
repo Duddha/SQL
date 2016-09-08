@@ -1,0 +1,258 @@
+PL/SQL Developer Report
+
+[SQL]
+SELECT tbl_name "Таблица"
+       ,decode(num_of_records
+             ,'0'
+             ,'-- нет записей --'
+             ,num_of_records) "Кол-во записей"
+  FROM (SELECT 'Проверяемый табельный номер' tbl_name
+              ,to_char(&< NAME = "Таб. №" hint = "Табельный номер для проверки" >) num_of_records
+          FROM dual
+        UNION ALL
+        SELECT 'QWERTY.SP_RB_FIO' tbl_name
+              ,to_char(COUNT(*)) num_of_records
+          FROM qwerty.sp_rb_fio
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_RB_FIO Статус' tbl_name
+              ,to_char(status) || ' (' || decode(status
+                                                ,1
+                                                ,'работает'
+                                                ,2
+                                                ,'уволен'
+                                                ,3
+                                                ,'принимается'
+                                                ,4
+                                                ,'договорник'
+                                                ,5
+                                                ,'незаводской'
+                                                ,6
+                                                ,'удаленный двойник'
+                                                ,7
+                                                ,'пенсионер ВОХР'
+                                                ,8
+                                                ,'двойник [неисправленный]'
+                                                ,'неизвестный статус') || ')' num_of_records
+          FROM qwerty.sp_rb_fio
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_RB_KEY'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_rb_key
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_OSN'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_osn
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_OSN_NALOG'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_osn_nalog
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_ADRES'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_adres
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_PASPORT'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_pasport
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_OBR'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_obr
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_PRIEM'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_priem
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_WORK'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_work
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_PEREM'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_perem
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_UVOL'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_uvol
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_PENS_ALL'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_pens_all
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_ZAR_SWORK'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_zar_swork
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_ZAM (замещающий)'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_zam
+         WHERE id_tab_w = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_KA_ZAM (замещаемый)'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_ka_zam
+         WHERE id_tab_z = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_ZAR_LA_TAB'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_zar_la_tab
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_ZAR_SDOGOV'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_zar_sdogov
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_ZAR_SPENS'
+              ,to_char(COUNT(*))
+          FROM qwerty.sp_zar_spens
+         WHERE id_tab = &< NAME = "Таб. №" >
+        UNION ALL
+        SELECT 'QWERTY.SP_ZAR_ZAR13'
+              ,to_char(sys.get_zar13_count(&< NAME = "Таб. №" >)) --count(*)
+          FROM dual --qwerty.sp_zar_zar13
+        --where tab = &<name="Таб. №" hint="Табельный номер для проверки">
+        UNION ALL
+        SELECT 'COUNT.SP_PRIVAT_SOTR'
+              ,to_char(COUNT(*))
+          FROM count.sp_privat_sotr
+         WHERE id_tab = &< NAME = "Таб. №" >)
+
+[Options]
+Connect=False
+Username=
+Password=2600
+Database=ora722
+ConnectAs=Normal
+LockMode=0
+LockedPassword=2251
+BkgColor=-16777211
+BkgImage=
+FormLayout=False
+OnlyNBSP=False
+LeftMargin=0
+TopMargin=0
+PageBreak=0
+AddSQL=False
+HandleTags=True
+
+[Styles]
+
+{Title}
+Enabled=True
+Name=Report Title
+Description=Проверка табельного номера
+Style=Custom...
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Param}
+Enabled=True
+Name=Variables
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Table}
+Enabled=False
+Name=Tabular Tables
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Form}
+Enabled=False
+Name=Form Tables
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{Field}
+Enabled=False
+Name=Default Field
+Description=
+Style=
+HeaderStyle=
+Align=0
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=Таблица
+Description=Наименование таблицы
+Style=Custom...
+HeaderStyle=Blue Header
+Align=4
+Break=0
+Function=0
+Format=
+
+{*}
+Enabled=True
+Name=Кол-во записей
+Description=Количество записей
+Style=Custom...
+HeaderStyle=Blue Header
+Align=0
+Break=0
+Function=0
+Format=
+
+
+
+[CSS]
+**4-Report Title
+{
+  Font-size: 16pt;
+  Font-weight: Bold;
+  Text-align: Center;
+  Width: 100%;
+}
+
+*4-Default Field
+{
+  Font-weight: Bold;
+}
+
+Blue Header
+{
+  Background: #400080;
+  Color: #FFE0E0;
+  Border-style: None;
+  Font-family: Arial;
+  Font-size: 9pt;
+  Font-weight: Bold;
+}
+
+

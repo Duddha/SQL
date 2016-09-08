@@ -1,0 +1,10 @@
+-- TAB = Список таблиц по размеру
+SELECT SEGMENT_NAME
+      ,SEGMENT_TYPE
+      ,SUM(BYTES) AS BYTES
+      ,SUM(BYTES) / 1024 AS KB
+      ,SUM(bytes) / 1024 / 1024 AS MB
+  FROM USER_SEGMENTS
+ GROUP BY SEGMENT_NAME
+         ,SEGMENT_TYPE
+ ORDER BY MB DESC

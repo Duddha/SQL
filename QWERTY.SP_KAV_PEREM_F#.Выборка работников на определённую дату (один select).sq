@@ -1,0 +1,9 @@
+SQL=SELECT f3.*
+=  FROM qwerty.sp_kav_perem_f3 f3
+= WHERE to_date(&< NAME = "Дата выборки" HINT = "Дата в формате ДД.ММ.ГГГГ" TYPE = "string" DEFAULT = "select to_char(sysdate, 'dd.mm.yyyy') from dual" >
+=               ,'dd.mm.yyyy') BETWEEN data_work AND data_kon - 1
+Width=1652
+Height=1073
+Splitter=449
+Maximized=True
+SingleRecord=False

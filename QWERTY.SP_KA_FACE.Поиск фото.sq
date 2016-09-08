@@ -1,0 +1,14 @@
+SQL=select rbf.id_tab "Таб. №",
+=       rbf.fam_u || ' ' || rbf.f_name_u || ' ' || rbf.s_name_u fio,
+=       f.face
+=  from qwerty.sp_ka_face f, qwerty.sp_rb_fio rbf
+= where rbf.id_tab = &< name = "Табельный номер"
+= list =
+=       "select id_tab, fam_u||' '||f_name_u||' '||s_name_u from qwerty.sp_rb_fio order by 2"
+= description = "yes" >
+=   and rbf.id_tab = f.id_tab
+Width=1172
+Height=826
+Splitter=582
+Maximized=True
+SingleRecord=False

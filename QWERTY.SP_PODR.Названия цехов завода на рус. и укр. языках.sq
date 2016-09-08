@@ -1,0 +1,21 @@
+SQL=SELECT id_cex "Код цеха"
+=       ,lpad(' '
+=           ,(LEVEL - 1) * 4
+=           ,' ') || name_u "Название (рус.)"
+=       ,lpad(' '
+=           ,(LEVEL - 1) * 4
+=           ,' ') || name_r "Название (укр.)"
+=       ,nam "Сокращенное название (рус.)"
+=       ,nam_r "Сокращенное название (укр.)"
+=  FROM qwerty.SP_PODR t
+= WHERE substr(TYPE_MASK
+=             ,3
+=             ,1) <> '0'
+=CONNECT BY parent_id = PRIOR id_cex
+= START WITH parent_id IS NULL
+= ORDER SIBLINGS BY id_cex
+Width=1628
+Height=1073
+Splitter=627
+Maximized=True
+SingleRecord=False
