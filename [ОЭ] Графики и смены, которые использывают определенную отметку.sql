@@ -1,7 +1,6 @@
--- Перечень графиков и смен, которые использывают выбранную отметку
-
 SELECT mark_id
       ,schedule_id
+      ,schedule_name
       ,schedule_name || ' (смен' || decode(LEVEL
                                           ,1
                                           ,'а '
@@ -18,9 +17,19 @@ SELECT mark_id
           FROM qwerty.sp_zar_tabl_smen tbls
               ,qwerty.sp_zar_s_smen    ss
               ,qwerty.sp_zar_t_smen    ts
-         WHERE tbls.id_otmetka = :m_ID_OTMETKA
+         WHERE tbls.id_otmetka = &<NAME="ID_OTMETKA" TYPE="string">
            AND tbls.id_smen = ss.id_smen
-           AND ss.tip_smen = ts.tip_smen)
+           AND ss.tip_smen = ts.tip_smen
+        UNION ALL
+        SELECT id_otmetka
+              ,'-'
+              ,'тип ' || tip
+              ,-1
+              ,'отметка неявки: ' || opis
+              ,NULL
+              ,NULL
+          FROM qwerty.sp_zar_otne_prop
+         WHERE id_otmetka = &ID_OTMETKA)
  WHERE next_shift_id IS NULL
 CONNECT BY PRIOR schedule_id = schedule_id
        AND PRIOR shift_id = prev_shift_id
