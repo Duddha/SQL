@@ -37,7 +37,8 @@ WITH uvol_period AS
      AND p.id_tab = u.id_tab
      AND p.data_kon = u.data_uvol
   --Не учитывать сторожей
-   &< NAME = "Не показывать сторожей" HINT = "Не включать в список уволенных сторожей ЖК" CHECKBOX = "AND p.id_n_mest <> 1232," DEFAULT = "AND p.id_n_mest <> 1232" >
+   &< NAME = "Не показывать сторожей" HINT = "Не включать в список уволенных сторожей ЖК" CHECKBOX = "AND p.id_n_mest <> 1232,"
+   DEFAULT = "AND p.id_n_mest <> 1232" >
      AND rbf.id_tab = u.id_tab
      AND ac.id = p.id_n_cex
      AND am.id = p.id_n_mest
@@ -52,11 +53,22 @@ WITH uvol_period AS
   --group by id_tab
   )
 
-SELECT "Ф.И.О."
+SELECT to_char("Дата увольнения"
+               ,'month') AS "Месяц"
        ,"Вид увольнения"
+       ,"Ф.И.О."
        ,"Дата увольнения"
-       ,"Регистрация"
-       ,"Телефон"
+       --,"Вид увольнения"
+       --,"Приказ"
+       --,"Регистрация"
+       --,"Телефон"
+       ,"Цех"
+       ,"Должность"
+       ,qwerty.hr.GET_EMPLOYEE_AGE("Таб. №") AS "Возраст"
+       ,qwerty.hr.GET_EMPLOYEE_STAG("Таб. №") AS "Стаж"
   FROM uvol_period
- ORDER BY 1;
+ ORDER BY 1
+         ,2
+         ,5
+         ,3;
 --select distinct "Вид увольнения", count(*) over (partition by "Вид увольнения") "Количество" from uvol_period order by 1
